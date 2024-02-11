@@ -76,7 +76,7 @@ export async function initializeMapAndLocator(titleList) {
 
 async function fetchPm25Value(sensorNumber) {
   try {
-    const response = await fetch(`http://localhost:5000/`);
+    const response = await fetch(process.env.VUE_APP_API_URL);
     const data = await response.json();
 
     const pm25Messages = data.filter(

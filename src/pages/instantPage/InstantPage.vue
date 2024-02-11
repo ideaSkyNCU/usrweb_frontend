@@ -12,14 +12,7 @@
             <strong>地點｜Locations</strong>
           </q-item-label>
         </q-item-section>
-        <q-btn
-          flat
-          color="blue"
-          :icon="matArrowBack"
-          label="返回上一頁"
-          @click="$router.go(-1)"
-          style="font-weight: bold"
-        />
+        <q-btn flat color="blue" :icon="matArrowBack" label="返回上一頁" @click="$router.go(-1)" style="font-weight: bold" />
       </q-item>
 
       <q-separator class="q-itemider" size="5px" color="transparent" />
@@ -27,22 +20,16 @@
       <div style="max-width: 330px">
         <q-list separator class="title text-bold q-ml-md">
           <q-item>
-            <q-item-section
-              >{{ $route.params.id }}. {{ $route.params.name }}({{
-                $route.params.number
-              }})</q-item-section
-            >
+            <q-item-section>{{ $route.params.id }}. {{ $route.params.name }}({{
+              $route.params.number
+            }})</q-item-section>
           </q-item>
         </q-list>
       </div>
       <q-separator class="q-itemider" size="10px" color="transparent" />
       <div>
-        <strong v-if="showSpinner" class="q-flex"
-          ><q-icon
-            name="hourglass_empty"
-            size="sm"
-            class="q-ml-xl"
-          />資料讀取需要一點時間，請稍等片刻...
+        <strong v-if="showSpinner" class="q-flex"><q-icon name="hourglass_empty" size="sm"
+            class="q-ml-xl" />資料讀取需要一點時間，請稍等片刻...
         </strong>
       </div>
     </q-list>
@@ -105,10 +92,8 @@
         </q-item-section>
         <q-item-section>
           <q-item-label class="text-subtitleText1 q-mt-md">
-            <strong
-              >熱點地圖｜Map
-              (若無熱點顯示，請稍等片刻；若為灰色，則為無資料)</strong
-            >
+            <strong>熱點地圖｜Map
+              (若無熱點顯示，請稍等片刻；若為灰色，則為無資料)</strong>
           </q-item-label>
         </q-item-section>
       </q-item>
@@ -155,7 +140,7 @@ export default defineComponent({
   methods: {
     fetchMessages(number) {
       this.isLocationLoading = true;
-      fetch(`http://localhost:5000/`)
+      fetch(process.env.VUE_APP_API_URL)
         .then((response) => response.json())
         .then((data) => {
           const pm25Messages = data.filter(

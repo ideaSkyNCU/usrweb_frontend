@@ -13,14 +13,7 @@
           </q-item-label>
         </q-item-section>
 
-        <q-btn
-          flat
-          color="blue"
-          :icon="matArrowBack"
-          label="返回上一頁"
-          @click="$router.go(-1)"
-          style="font-weight: bold"
-        />
+        <q-btn flat color="blue" :icon="matArrowBack" label="返回上一頁" @click="$router.go(-1)" style="font-weight: bold" />
       </q-item>
 
       <q-separator class="q-itemider" size="5px" color="transparent" />
@@ -40,28 +33,14 @@
 
     <q-list separator class="q-mt-md q-ml-md">
       <div>
-        <q-btn
-          flat
-          label="PM濃度分析"
-          @click="togglePictures('PM')"
-          v-ripple.early
-          class="q-btn-transparent"
-          :class="{ linkon: activeSet === 'PM' }"
-          :style="{
+        <q-btn flat label="PM濃度分析" @click="togglePictures('PM')" v-ripple.early class="q-btn-transparent"
+          :class="{ linkon: activeSet === 'PM' }" :style="{
+                backgroundImage: 'url(' + 'https://i.imgur.com/rORuNtC.jpg' + ')',
+              }" />
+        <q-btn flat label="溫度/濕度分析" @click="togglePictures('T_RH')" v-ripple.early class="q-btn-transparent"
+          :class="{ linkon: activeSet === 'T_RH' }" :style="{
             backgroundImage: 'url(' + 'https://i.imgur.com/rORuNtC.jpg' + ')',
-          }"
-        />
-        <q-btn
-          flat
-          label="溫度/濕度分析"
-          @click="togglePictures('T_RH')"
-          v-ripple.early
-          class="q-btn-transparent"
-          :class="{ linkon: activeSet === 'T_RH' }"
-          :style="{
-            backgroundImage: 'url(' + 'https://i.imgur.com/rORuNtC.jpg' + ')',
-          }"
-        />
+          }" />
       </div>
     </q-list>
     <q-list class="folder q-ml-md">
@@ -135,9 +114,12 @@ import { titleList } from "src/pages/data.js";
 import { matArrowBack } from "@quasar/extras/material-icons";
 import { useRoute } from "vue-router";
 
+
+
 export default defineComponent({
   name: "LongTermPicture",
   setup() {
+
     const route = useRoute();
 
     const id = route.params.id;
@@ -164,7 +146,7 @@ export default defineComponent({
     };
 
     const getAnalysisImageUrl = (type) =>
-      `http://127.0.0.1:5000/longtermPicture/${type}/${id}`;
+      `${process.env.VUE_APP_API_URL}/longtermPicture/${type}/${id}`;
 
     onMounted(() => {
       initializeMapAndLocator(titleList.value);

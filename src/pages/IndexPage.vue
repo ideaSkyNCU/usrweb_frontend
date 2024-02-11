@@ -16,13 +16,8 @@
     </q-list>
     <div class="example-col-gutter-vertical text-bold">
       <div class="row q-col-gutter-y-none">
-        <q-item
-          v-for="title in titleList"
-          :key="title.id"
-          @click="navigateToTitle(title.id, title.name, title.number)"
-          clickable
-          class="col-4 my-content"
-        >
+        <q-item v-for="title in titleList" :key="title.id" @click="navigateToTitle(title.id, title.name, title.number)"
+          clickable class="col-4 my-content">
           {{ title.id }}.{{ title.name }}({{ title.number }})
         </q-item>
       </div>
@@ -37,10 +32,8 @@
         </q-item-section>
         <q-item-section>
           <q-item-label class="text-subtitleText1 q-mt-md">
-            <strong
-              >熱點地圖｜Map
-              (若無熱點顯示，請稍等片刻；若為灰色，則為無資料)</strong
-            >
+            <strong>熱點地圖｜Map
+              (若無熱點顯示，請稍等片刻；若為灰色，則為無資料)</strong>
           </q-item-label>
         </q-item-section>
       </q-item>
@@ -93,7 +86,7 @@ export default defineComponent({
   },
   methods: {
     fetchMessages(number) {
-      fetch(`http://localhost:5000/`)
+      fetch(process.env.VUE_APP_API_URL)
         .then((response) => response.json())
         .then((data) => {
           const pm25Messages = data.filter(
