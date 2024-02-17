@@ -33,11 +33,11 @@
 
     <q-list separator class="q-mt-md q-ml-md">
       <div>
-        <q-btn flat label="PM濃度分析" @click="togglePictures('PM')" v-ripple.early class="q-btn-transparent"
+        <q-btn flat label="PM濃度歷年月平均" @click="togglePictures('PM')" v-ripple.early class="q-btn-transparent"
           :class="{ linkon: activeSet === 'PM' }" :style="{
                 backgroundImage: 'url(' + 'https://i.imgur.com/rORuNtC.jpg' + ')',
               }" />
-        <q-btn flat label="溫度/濕度分析" @click="togglePictures('T_RH')" v-ripple.early class="q-btn-transparent"
+        <q-btn flat label="溫度/濕度歷年月平均" @click="togglePictures('T_RH')" v-ripple.early class="q-btn-transparent"
           :class="{ linkon: activeSet === 'T_RH' }" :style="{
             backgroundImage: 'url(' + 'https://i.imgur.com/rORuNtC.jpg' + ')',
           }" />
@@ -123,6 +123,7 @@ export default defineComponent({
     const route = useRoute();
 
     const id = route.params.id;
+    const number = route.params.number;
 
     const activeSet = ref("PM");
 
@@ -136,18 +137,17 @@ export default defineComponent({
 
     const getAnalysisTitle = (type) => {
       const titles = {
-        PM2_5: "PM2.5濃度分析",
-        PM1: "PM1濃度分析",
-        PM10: "PM10濃度分析",
-        RH: "濕度分析",
-        T: "溫度分析",
+        PM2_5: "PM2.5",
+        PM1: "PM1",
+        PM10: "PM10",
+        RH: "濕度",
+        T: "溫度",
       };
-      return `${titles[type]}(2020/01/01~2023/07/31)`;
+      return `${titles[type]}(2020/01~2023/07歷年月平均)`;
     };
 
     const getAnalysisImageUrl = (type) =>
-      `${process.env.VUE_APP_API_URL}/longtermPicture/${type}/${id}`;
-
+      require(`src/assets/longterm/${type}/${number}.png`);
     onMounted(() => {
       initializeMapAndLocator(titleList.value);
     });
