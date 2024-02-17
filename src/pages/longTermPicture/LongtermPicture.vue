@@ -42,7 +42,7 @@
       <div>
         <q-btn
           flat
-          label="PM濃度分析"
+          label="PM濃度歷年月平均"
           @click="togglePictures('PM')"
           v-ripple.early
           class="q-btn-transparent"
@@ -53,7 +53,7 @@
         />
         <q-btn
           flat
-          label="溫度/濕度分析"
+          label="溫度/濕度歷年月平均"
           @click="togglePictures('T_RH')"
           v-ripple.early
           class="q-btn-transparent"
@@ -154,17 +154,16 @@ export default defineComponent({
 
     const getAnalysisTitle = (type) => {
       const titles = {
-        PM2_5: "PM2.5濃度分析",
-        PM1: "PM1濃度分析",
-        PM10: "PM10濃度分析",
-        RH: "濕度分析",
-        T: "溫度分析",
+        PM2_5: "PM2.5濃度歷年月平均變化",
+        PM1: "PM1濃度歷年月平均變化",
+        PM10: "PM10濃度歷年月平均變化",
+        RH: "濕度歷年月平均變化",
+        T: "溫度歷年月平均變化",
       };
-      return `${titles[type]}(2020/01/01~2023/07/31)`;
+      return `${titles[type]}(2020/01/01~2023/07/31歷年月平均資料)`;
     };
 
-    const getAnalysisImageUrl = (type) =>
-      `http://127.0.0.1:5000/longtermPicture/${type}/${id}`;
+    const getAnalysisImageUrl = (type) => `./assets/longterm/${type}/${id}.png`;
 
     onMounted(() => {
       initializeMapAndLocator(titleList.value);
