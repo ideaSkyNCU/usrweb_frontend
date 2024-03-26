@@ -140,7 +140,11 @@ export default defineComponent({
   methods: {
     fetchMessages(number) {
       this.isLocationLoading = true;
-      fetch(process.env.VUE_APP_API_URL)
+      let url = process.env.VUE_APP_DEV_API_URL;
+      if (process.env.NODE_ENV === 'producrion') {
+        url = process.env.VUE_APP_PRO_API_URL
+      }
+      fetch(url)
         .then((response) => response.json())
         .then((data) => {
           const pm25Messages = data.filter(
